@@ -1,7 +1,7 @@
 <!--
   Odie
   mexico city 2015
-  based on https://github.com/mikeyrayvon/gdocs-cms
+  https://github.com/mikeyrayvon/odie
 -->
 <?php
   $url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/{$_SERVER['REQUEST_URI']}";
@@ -95,7 +95,28 @@
         <p><input type="text" name="description" id="description" placeholder="description"></p>
         <input type="submit" value="XD">
       </form>
+      <div id="response"></div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        var insertPHP = $('form').attr('action');
+        $('form').on('submit', function() {
+          var username = $('input#username').val(),
+          url = $('input#url').val(),
+          title = $('input#title').val(),
+          description = $('input#description').val(),
+          dataString = 'username='+ username + '&url=' + url + '&title=' + title + '&description=' + description;
+          $.ajax({
+            type: "POST",
+            url: insertPHP,
+            data: dataString,
+            success: function(response) {
+              $('#response').html(response);
+            }
+          });
+          return false;
+        });
+    </script>
   <?php } ?>
   </body>
 </html>
