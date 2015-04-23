@@ -108,7 +108,7 @@
       </section>
       <section>
         <p>
-          Odie makes a webpage with the content of a published google doc and gives it an odie subdomain, username.odie.club
+          Odie makes a webpage with the content of a published google doc and gives it an odie subdomain, username.odie.us
         </p>
         <p>
           Open your google doc and File > Publish to the web. The link in that dialog is your published doc url
