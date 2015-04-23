@@ -4,6 +4,10 @@
   https://github.com/mikeyrayvon/odie
 -->
 <?php
+
+  $title = 'Odie';
+  $description = 'Odie gdocs-cms network';
+
   $url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/{$_SERVER['REQUEST_URI']}";
   $query = (parse_url($url, PHP_URL_QUERY));
   parse_str($query);
@@ -52,12 +56,7 @@
       $contents = $dom->saveHTML($dom->getElementById('contents'));
     } else {
       $error = '400004 odie doc not found D:';
-      $title = 'Odie';
-      $description = 'gdocs-cms network';
     }
-  } else {
-    $title = 'Odie';
-    $description = 'gdocs-cms network';
   }
 ?>
 <html>
