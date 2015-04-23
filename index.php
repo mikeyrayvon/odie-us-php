@@ -66,10 +66,10 @@
     <meta property="og:type" content="website" />
     <style type="text/css"> 
     html, body {margin: 0;padding: 0;width: 100%;height: 100%;font-family: sans-serif} 
-    #contents {width: 1100px;margin: 50px auto;} 
+    #contents {width: 1000px;margin: 50px auto;} 
     section {width: 300px;margin: 0 10px 30px;display: inline-block;vertical-align: top}
     h1 {font-size: 2em} input {width: 100%;font-family: sans-serif} img {max-width: 100%} 
-    @media screen and (max-width: 1100px) { #contents {width: 90%;margin: 5% auto;} } 
+    @media screen and (max-width: 1000px) { #contents {width: 90%;margin: 5% auto;} } 
     @media screen and (max-width: 700px) { section,h1 {width: 300px;margin: 0 auto 30px;display:block;}span, img, iframe { max-width: 100% !important;width: auto !important;height: auto !important;}} 
     </style>
   </head>
