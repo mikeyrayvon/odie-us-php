@@ -63,39 +63,51 @@
     <meta property="og:title" content="<?php echo $title; ?>" />
     <meta property="og:description" content="<?php echo $description; ?>" />
     <meta property="og:type" content="website" />
-    <style type="text/css"> html, body {margin: 0; padding: 0; width: 100%;height: 100%;} #contents {width: 1100px;margin: 50px auto;} img {max-width: 100%} @media screen and (max-width: 1000px) { #contents {width: 90%;margin: 5%;} } @media screen and (max-width: 700px) { span, img, iframe { max-width: 100% !important;width: auto !important;height: auto !important;}} </style>
+    <style type="text/css"> 
+    html, body {margin: 0; padding: 0; width: 100%;height: 100%;} 
+    #contents {width: 1100px;margin: 50px auto;} 
+    section {width: 49%; display: inline-block; vertical-align: top}
+    h1 {font-size: 2em} input {width: 300px;} img {max-width: 100%} 
+    @media screen and (max-width: 1000px) { #contents {width: 90%;margin: 5% auto;} } 
+    @media screen and (max-width: 700px) { section {width: 100%;} input {width: 100%;} span, img, iframe { max-width: 100% !important;width: auto !important;height: auto !important;}} 
+    </style>
   </head>
   <body>
     <?php if ($contents) { echo $contents; } else { ?>
-    <div id="contents">
-      <pre><code>
-      _.._   _..---.
-   .-"    ;-"       \
-  /      /           |
- |      |       _=   |
- ;   _.-'\__.-')     |
-  `-'      |   |    ;
-           |  /;   /      _,
-         .-.;.-=-./-""-.-` _`
-        /   |     \     \-` `,
-       |    |      |     |
-       |____|______|     |
-        \0 / \0   /      /
-     .--.-""-.`--'     .'
-    (#   )          ,  \
-    ('--'          /\`  \
-     \       ,,  .'      \
-      `-._    _.'\        \
-          `""`    \        \
-      </code></pre>
-      <form action="insert.php" method="post">
-        <p><input type="text" name="username" id="username" placeholder="username"></p>
-        <p><input type="text" name="url" id="url" placeholder="gdocs url"></p>
-        <p><input type="text" name="title" id="title" placeholder="title"></p>
-        <p><input type="text" name="description" id="description" placeholder="description"></p>
-        <input type="submit" value="XD">
-      </form>
-      <div id="response"></div>
+    <div id="contents" class='center'>
+      <h1>Odie</h1>
+      <section>
+        <pre><code>
+              _.._   _..---.
+           .-"    ;-"       \
+          /      /           |
+         |      |       _=   |
+         ;   _.-'\__.-')     |
+          `-'      |   |    ;
+                   |  /;   /      _,
+                 .-.;.-=-./-""-.-` _`
+                /   |     \     \-` `,
+               |    |      |     |
+               |____|______|     |
+                \0 / \0   /      /
+             .--.-""-.`--'     .'
+            (#   )          ,  \
+            ('--'          /\`  \
+             \       ,,  .'      \
+              `-._    _.'\        \
+                  `""`    \        \
+        </code></pre>
+        <form action="insert.php" method="post" id='new-user'>
+          <p><input type="text" name="username" id="username" placeholder="username"></p>
+          <p><input type="text" name="url" id="url" placeholder="gdocs url"></p>
+          <p><input type="text" name="title" id="title" placeholder="title"></p>
+          <p><input type="text" name="description" id="description" placeholder="description"></p>
+          <input type="submit" value="XD">
+        </form>
+        <div id="response"></div>
+      </section>
+      <section>
+      </section>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript">
