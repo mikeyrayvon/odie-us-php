@@ -18,7 +18,7 @@
     {
       die('Could not connect: ' . mysql_error());
     }
-    $sql = "SELECT url, title, description FROM users WHERE username = '".$u."'";
+    $sql = "SELECT url FROM users WHERE username = '".$u."'";
 
     mysql_select_db('odie');
     $retval = mysql_query( $sql, $conn );
@@ -28,8 +28,6 @@
     }
     while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
     {
-        $title = $row['title'];
-        $description = $row['description'];
         $publishedDocUrl = $row['url'];
     } 
     mysql_close($conn);
@@ -53,11 +51,11 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><?php echo $title; ?></title>
-    <meta name="description" content="<?php echo $description; ?>">
+    <title>Odie</title>
+    <meta name="description" content="Odie">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:title" content="<?php echo $title; ?>" />
-    <meta property="og:description" content="<?php echo $description; ?>" />
+    <meta property="og:title" content="Odie" />
+    <meta property="og:description" content="Odie" />
     <meta property="og:type" content="website" />
     <style type="text/css"> html, body {margin: 0; padding: 0; width: 100%;height: 100%;} #contents {width: 1100px;margin: 50px auto;} img {max-width: 100%} @media screen and (max-width: 1000px) { #contents {width: 90%;margin: 5%;} } @media screen and (max-width: 700px) { span, img, iframe { max-width: 100% !important;width: auto !important;height: auto !important;}} </style>
   </head>
