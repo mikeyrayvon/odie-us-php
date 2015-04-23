@@ -85,7 +85,7 @@
       <h1>Odie</h1>
       <section>
         
-        <pre><code>
+        <pre>
         _.._   _..---.
      .-"    ;-"       \
     /      /           |
@@ -104,7 +104,7 @@
        \       ,,  .'      \
         `-._    _.'\        \
             `""`    \        \
-        </code></pre>
+        </pre>
       </section>
       <section>
         <p>
