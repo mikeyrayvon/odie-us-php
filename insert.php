@@ -11,13 +11,15 @@ if($link === false){
 // Escape user inputs for security
 $username = mysqli_real_escape_string($link, $_POST['username']);
 $url = mysqli_real_escape_string($link, $_POST['url']);
+$title = mysqli_real_escape_string($link, $_POST['title']);
+$description = mysqli_real_escape_string($link, $_POST['description']);
  
 // attempt insert query execution
 $result = mysqli_query($link, "SELECT * FROM users WHERE username = '$username'");
 
 if(mysqli_num_rows($result) == 0) {
-	$sql = "INSERT INTO `users` (username, url)
-	SELECT '$username', '$url'";
+	$sql = "INSERT INTO `users` (username, url, title, description)
+	SELECT '$username', '$url', '$title', '$description'";
 	if(mysqli_query($link, $sql)){
 	    echo "Records added successfully.";
 	} else{

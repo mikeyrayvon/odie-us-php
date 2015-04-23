@@ -18,7 +18,8 @@
     {
       die('Could not connect: ' . mysql_error());
     }
-    $sql = "SELECT url FROM users WHERE username = '".$u."'";
+    $table = 'users';
+    $sql = "SELECT url, title, description FROM $table WHERE username = '$u'";
 
     mysql_select_db('odie');
     $retval = mysql_query( $sql, $conn );
@@ -29,6 +30,8 @@
     while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
     {
         $publishedDocUrl = $row['url'];
+        $title = $row['title'];
+        $description = $row['description'];
     } 
     mysql_close($conn);
 
@@ -45,17 +48,20 @@
     $dom->validateOnParse = true;
     $contents = $dom->saveHTML($dom->getElementById('contents'));
 
+  } else {
+    $title = 'Odie';
+    $description = 'gdocs-cms network';
   }
 ?>
 <html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Odie</title>
-    <meta name="description" content="Odie">
+    <title><?php echo $title; ?></title>
+    <meta name="description" content="<?php echo $description; ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:title" content="Odie" />
-    <meta property="og:description" content="Odie" />
+    <meta property="og:title" content="<?php echo $title; ?>" />
+    <meta property="og:description" content="<?php echo $description; ?>" />
     <meta property="og:type" content="website" />
     <style type="text/css"> html, body {margin: 0; padding: 0; width: 100%;height: 100%;} #contents {width: 1100px;margin: 50px auto;} img {max-width: 100%} @media screen and (max-width: 1000px) { #contents {width: 90%;margin: 5%;} } @media screen and (max-width: 700px) { span, img, iframe { max-width: 100% !important;width: auto !important;height: auto !important;}} </style>
   </head>
@@ -85,6 +91,8 @@
       <form action="insert.php" method="post">
         <p><input type="text" name="username" id="username" placeholder="username"></p>
         <p><input type="text" name="url" id="url" placeholder="gdocs url"></p>
+        <p><input type="text" name="title" id="title" placeholder="title"></p>
+        <p><input type="text" name="description" id="description" placeholder="description"></p>
         <input type="submit" value="XD">
       </form>
     </div>
