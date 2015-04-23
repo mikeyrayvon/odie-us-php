@@ -64,12 +64,12 @@
     <meta property="og:description" content="<?php echo $description; ?>" />
     <meta property="og:type" content="website" />
     <style type="text/css"> 
-    html, body {margin: 0; padding: 0; width: 100%;height: 100%;} 
+    html, body {margin: 0;padding: 0;width: 100%;height: 100%;font-family: monospace} 
     #contents {width: 1100px;margin: 50px auto;} 
-    section {width: 49%; display: inline-block; vertical-align: top}
-    h1 {font-size: 2em} input {width: 300px;} img {max-width: 100%} 
-    @media screen and (max-width: 1000px) { #contents {width: 90%;margin: 5% auto;} } 
-    @media screen and (max-width: 700px) { section {width: 100%;} input {width: 100%;} span, img, iframe { max-width: 100% !important;width: auto !important;height: auto !important;}} 
+    section {width: 300px;margin: 0 10px 30px;display: inline-block;vertical-align: top}
+    h1 {font-size: 2em} input {width: 100%;font-family: monospace} img {max-width: 100%} 
+    @media screen and (max-width: 1100px) { #contents {width: 90%;margin: 5% auto;} } 
+    @media screen and (max-width: 700px) { section,h1 {width: 300px;margin: 0 auto 30px;display:block;}span, img, iframe { max-width: 100% !important;width: auto !important;height: auto !important;}} 
     </style>
   </head>
   <body>
@@ -77,36 +77,43 @@
     <div id="contents" class='center'>
       <h1>Odie</h1>
       <section>
+        
         <pre><code>
-              _.._   _..---.
-           .-"    ;-"       \
-          /      /           |
-         |      |       _=   |
-         ;   _.-'\__.-')     |
-          `-'      |   |    ;
-                   |  /;   /      _,
-                 .-.;.-=-./-""-.-` _`
-                /   |     \     \-` `,
-               |    |      |     |
-               |____|______|     |
-                \0 / \0   /      /
-             .--.-""-.`--'     .'
-            (#   )          ,  \
-            ('--'          /\`  \
-             \       ,,  .'      \
-              `-._    _.'\        \
-                  `""`    \        \
+        _.._   _..---.
+     .-"    ;-"       \
+    /      /           |
+   |      |       _=   |
+   ;   _.-'\__.-')     |
+    `-'      |   |    ;
+             |  /;   /      _,
+           .-.;.-=-./-""-.-` _`
+          /   |     \     \-` `,
+         |    |      |     |
+         |____|______|     |
+          \0 / \0   /      /
+       .--.-""-.`--'     .'
+      (#   )          ,  \
+      ('--'          /\`  \
+       \       ,,  .'      \
+        `-._    _.'\        \
+            `""`    \        \
         </code></pre>
+      </section>
+      <section>
+        <p>
+          Odie makes a webpage with the content of a published google doc and gives it an odie subdomain, username.odie.club
+        </p>
+        <p>
+          Open your google doc and File > Publish to the web. The link in that dialog is your published doc url
+        </p>
         <form action="insert.php" method="post" id='new-user'>
           <p><input type="text" name="username" id="username" placeholder="username"></p>
-          <p><input type="text" name="url" id="url" placeholder="gdocs url"></p>
+          <p><input type="text" name="url" id="url" placeholder="published doc url"></p>
           <p><input type="text" name="title" id="title" placeholder="title"></p>
           <p><input type="text" name="description" id="description" placeholder="description"></p>
           <input type="submit" value="XD">
         </form>
         <div id="response"></div>
-      </section>
-      <section>
       </section>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
