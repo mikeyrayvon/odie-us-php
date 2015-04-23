@@ -43,7 +43,8 @@
     $html = curl_exec($ch);
     curl_close($ch);
     $dom = new DOMDocument();
-    $dom->loadHTML($html);
+    $dom->encoding = 'utf-8';
+    $dom->loadHTML(utf8_decode( $html ));
     $dom->preserveWhiteSpace = false;
     $dom->validateOnParse = true;
     $contents = $dom->saveHTML($dom->getElementById('contents'));
@@ -74,7 +75,7 @@
   </head>
   <body>
     <?php if ($contents) { echo $contents; } else { ?>
-    <div id="contents" class='center'>
+    <div id="contents">
       <h1>Odie</h1>
       <section>
         
