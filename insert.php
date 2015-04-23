@@ -21,9 +21,9 @@ if(mysqli_num_rows($result) == 0) {
 	$sql = "INSERT INTO `users` (username, url, title, description)
 	SELECT '$username', '$url', '$title', '$description'";
 	if(mysqli_query($link, $sql)){
-	    echo "Records added successfully.";
+	    echo "success";
 	} else{
-	    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+	    echo "ERROR: was unable to execute $sql. " . mysqli_error($link);
 	}
 } else {
 	echo 'username already exists';
