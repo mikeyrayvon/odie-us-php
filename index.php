@@ -111,7 +111,8 @@
             url: insertPHP,
             data: dataString,
             success: function(response) {
-              $('#response').html(response);
+              var accountUrl = window.location.href + '/?u=' + username
+              $('#response').html(response + '<br><a href="' + accountUrl + '">' + accountUrl + '</a>');
             }
           });
           return false;
