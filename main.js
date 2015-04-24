@@ -12,7 +12,7 @@ $('form').on('submit', function(e) {
   if (username.length > 0 && url.length > 0) {
     var host = parseURL(url).hostname; 
     var path = parseURL(url).pathname; 
-    var pub = path.substr(path.length - 4);; 
+    var pub = path.substr(path.length - 4);
     if ( host == 'docs.google.com' && pub == '/pub' ) {
       $.ajax({
         type: "POST",
@@ -46,17 +46,11 @@ function parseURL(url) {
   parser.href = url;
   queries = parser.search.replace(/^\?/, '').split('&');
   for( i = 0; i < queries.length; i++ ) {
-  split = queries[i].split('=');
-  searchObject[split[0]] = split[1];
+    split = queries[i].split('=');
+    searchObject[split[0]] = split[1];
   }
   return {
-  protocol: parser.protocol,
-  host: parser.host,
-  hostname: parser.hostname,
-  port: parser.port,
-  pathname: parser.pathname,
-  search: parser.search,
-  searchObject: searchObject,
-  hash: parser.hash
+    hostname: parser.hostname,
+    pathname: parser.pathname,
   };
 }
