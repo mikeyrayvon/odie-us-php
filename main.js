@@ -2,7 +2,6 @@ var insertPHP = $('form').attr('action');
 $('form').on('submit', function(e) {
   e.preventDefault();
 
-  $('#response').html('');
   $('input#url, input#username').css('border-color', 'initial');
 
   var username = $('input#username').val(),
