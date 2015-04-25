@@ -15,25 +15,24 @@
   $dbhost = 'localhost';
   $dbuser = 'root';
   $dbpass = 'root';
-  $conn = mysql_connect($dbhost, $dbuser, $dbpass);
-  if(! $conn ) { die('Could not connect: ' . mysql_error()); }
+  $conn = mysqli_connect($dbhost, $dbuser, $dbpass, 'odie');
+  if(! $conn ) { die('Could not connect: ' . mysqli_error()); }
   $table = 'users';
-  mysql_select_db('odie');
 
   if ($u) {    
     $sql = "SELECT url, title, description FROM $table WHERE username = '$u'";
 
-    $result = mysql_query( $sql, $conn );
-    $row = mysql_fetch_array($result, MYSQL_ASSOC);
+    $result = mysqli_query( $conn, $sql );
+    $row = mysqli_fetch_array($result, MYSQL_ASSOC);
     $publishedDocUrl = $row['url'];
     $title = $row['title'];
     $description = $row['description'];
 
     if (is_null($publishedDocUrl)) {
-      $error = '400004 odie doc not found D:';
+      $error = '404 odie doc not found D:';
     } else {
       $ch = curl_init();
-      $timeout = 5;
+      $timeout = 10;
       curl_setopt($ch, CURLOPT_URL, $publishedDocUrl);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
       curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
@@ -50,17 +49,25 @@
 
 // RANDOM ODIE
   if ($u) {
-    $random_sql = "SELECT * FROM $table WHERE username <> '$u' ORDER BY RAND() LIMIT 0,1 ";
+    $random_sql = "SELECT * FROM $table WHERE username <> '$u' ORDER BY RAND() LIMIT 0,1";
   } else {
-    $random_sql = "SELECT * FROM $table ORDER BY RAND() LIMIT 0,1 ";
+    $random_sql = "SELECT * FROM $table ORDER BY RAND() LIMIT 0,1";
   }
-  $random_query = mysql_query( $random_sql, $conn );
-  $random_row = mysql_fetch_array($random_query, MYSQL_ASSOC);
+  $random_query = mysqli_query( $conn, $random_sql );
+  $random_row = mysqli_fetch_array($random_query, MYSQL_ASSOC);
   $random_username = $random_row['username'];
   $random_url = 'http://localhost:8888/odie/?u=' . $random_username;
   $random_output = '<a href="' . $random_url . '" id="rand">.</a>';
 
-  mysql_close($conn); 
+// ODIE OF THE DAY
+  $daily_sql = "SELECT username FROM daily";
+  $daily_query = mysqli_query( $conn, $daily_sql );
+  $daily_row = mysqli_fetch_array($daily_query, MYSQL_ASSOC);
+  $daily_username = $daily_row['username'];
+  $daily_url = 'http://localhost:8888/odie/?u=' . $daily_username;
+  $daily_output = '<a href="' . $daily_url . '">' . $daily_url . '</a>';
+
+  mysqli_close($conn); 
 ?>
 <html>
   <head>
@@ -79,7 +86,7 @@
     h1 {font-size: 2em} input {width: 100%;font-family: sans-serif} img {max-width: 100%} 
     #rand {position: absolute;display: block;top: 10px;right: 20px;padding: 5px; text-decoration: none}
     @media screen and (max-width: 1000px) { #contents {width: 90%;margin: 5% auto} } 
-    @media screen and (max-width: 700px) { section,h1 {width: 300px;margin: 0 auto 30px;display:block}span, img, iframe { max-width: 100% !important;width: auto !important;height: auto !important}} 
+    @media screen and (max-width: 700px) { section,h1 {width: 300px;margin: 0 auto 30px;display:block}span, img, iframe { max-width: 100% !important;width: auto !important;height: auto !important;}} 
     </style>
   </head>
   <body>
@@ -126,6 +133,11 @@
           <input type="submit" value="XD">
         </form>
         <div id="response"></div>
+      </section>
+      <section>
+        <p>
+          Odie of the Day: <?php echo $daily_output; ?>
+        </p>
       </section>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
