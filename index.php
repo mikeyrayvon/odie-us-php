@@ -6,41 +6,32 @@
 <?php
 
   $title = 'Odie';
-  $description = 'Odie gdocs-cms network';
+  $description = 'gdocs-cms network';
 
   $url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/{$_SERVER['REQUEST_URI']}";
   $query = (parse_url($url, PHP_URL_QUERY));
   parse_str($query);
 
-  if ($u) {
+  $dbhost = 'localhost';
+  $dbuser = 'root';
+  $dbpass = 'root';
+  $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+  if(! $conn ) { die('Could not connect: ' . mysql_error()); }
+  $table = 'users';
+  mysql_select_db('odie');
 
-    $dbhost = 'localhost';
-    $dbuser = 'root';
-    $dbpass = 'root';
-    $conn = mysql_connect($dbhost, $dbuser, $dbpass);
-    if(! $conn )
-    {
-      die('Could not connect: ' . mysql_error());
-    }
-    $table = 'users';
+  if ($u) {    
     $sql = "SELECT url, title, description FROM $table WHERE username = '$u'";
 
-    if(mysqli_num_rows($sql) > 0) {
+    $result = mysql_query( $sql, $conn );
+    $row = mysql_fetch_array($result, MYSQL_ASSOC);
+    $publishedDocUrl = $row['url'];
+    $title = $row['title'];
+    $description = $row['description'];
 
-      mysql_select_db('odie');
-      $retval = mysql_query( $sql, $conn );
-      if(! $retval )
-      {
-        die('Could not get data: ' . mysql_error());
-      }
-      while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
-      {
-          $publishedDocUrl = $row['url'];
-          $title = $row['title'];
-          $description = $row['description'];
-      } 
-      mysql_close($conn);
-
+    if (is_null($publishedDocUrl)) {
+      $error = '400004 odie doc not found D:';
+    } else {
       $ch = curl_init();
       $timeout = 5;
       curl_setopt($ch, CURLOPT_URL, $publishedDocUrl);
@@ -54,10 +45,22 @@
       $dom->preserveWhiteSpace = false;
       $dom->validateOnParse = true;
       $contents = $dom->saveHTML($dom->getElementById('contents'));
-    } else {
-      $error = '400004 odie doc not found D:';
     }
   }
+
+// RANDOM ODIE
+  if ($u) {
+    $random_sql = "SELECT * FROM $table WHERE username <> '$u' ORDER BY RAND() LIMIT 0,1 ";
+  } else {
+    $random_sql = "SELECT * FROM $table ORDER BY RAND() LIMIT 0,1 ";
+  }
+  $random_query = mysql_query( $random_sql, $conn );
+  $random_row = mysql_fetch_array($random_query, MYSQL_ASSOC);
+  $random_username = $random_row['username'];
+  $random_url = 'http://localhost:8888/odie/?u=' . $random_username;
+  $random_output = '<a href="' . $random_url . '" id="rand">.</a>';
+
+  mysql_close($conn); 
 ?>
 <html>
   <head>
@@ -71,14 +74,16 @@
     <meta property="og:type" content="website" />
     <style type="text/css"> 
     html, body {margin: 0;padding: 0;width: 100%;font-family: sans-serif} 
-    #contents {width: 1000px;margin: 50px auto;} 
+    #contents {width: 1000px;margin: 50px auto} 
     section {width: 300px;margin: 0 10px 30px;display: inline-block;vertical-align: top}
     h1 {font-size: 2em} input {width: 100%;font-family: sans-serif} img {max-width: 100%} 
-    @media screen and (max-width: 1000px) { #contents {width: 90%;margin: 5% auto;} } 
-    @media screen and (max-width: 700px) { section,h1 {width: 300px;margin: 0 auto 30px;display:block;}span, img, iframe { max-width: 100% !important;width: auto !important;height: auto !important;}} 
+    #rand {position: absolute;display: block;top: 10px;right: 20px;padding: 5px; text-decoration: none}
+    @media screen and (max-width: 1000px) { #contents {width: 90%;margin: 5% auto} } 
+    @media screen and (max-width: 700px) { section,h1 {width: 300px;margin: 0 auto 30px;display:block}span, img, iframe { max-width: 100% !important;width: auto !important;height: auto !important}} 
     </style>
   </head>
   <body>
+    <?php echo $random_output; ?>
     <?php if ($contents) { echo $contents; } else { ?>
     <div id="contents">
       <?php if ($error) { echo $error; } ?>
