@@ -4,7 +4,8 @@ $('form').on('submit', function(e) {
 
   $('input#url, input#username').css('border-color', 'initial');
 
-  var username = $('input#username').val(),
+  var response,
+  username = $('input#username').val(),
   url = $('input#url').val(),
   title = $('input#title').val(),
   description = $('input#description').val(),
@@ -18,14 +19,23 @@ $('form').on('submit', function(e) {
         type: "POST",
         url: insertPHP,
         data: dataString,
-        success: function(response) {
-          var accountUrl = window.location.href + '?u=' + username
-          $('#response').html(response + '<br><a href="' + accountUrl + '">' + accountUrl + '</a>');
+        success: function(data) {
+          if (data == 'success') {
+            var accountUrl = window.location.href + '?u=' + username;
+            response = '<p><strong>Success!</strong><br>Here&apos;s your Odie:</p><p><a href="' + accountUrl + '">' + accountUrl + '</a></p>';
+          } else if (data == 'exists') {
+            response = '<p>That username already exists!<br>Try another</p>';
+          } else if (data == 'error') {
+            response = '<p>??? something went wrong</p>';
+          } else {
+            response = '<p>eh?</p>';
+          }
+          $('#response').html(response);
         }
       });
     } else {
       $('input#url').css('border-color', 'red');
-      $('#response').html('bad doc url');
+      $('#response').html('<p>bad doc url</p>');
     }
   } else {
     if (username.length == 0) {
@@ -34,7 +44,7 @@ $('form').on('submit', function(e) {
     if (url.length == 0) {
       $('input#url').css('border-color', 'red');
     }
-    $('#response').html('form incomplete');
+    $('#response').html('<p>form incomplete</p>');
   }
   return false;
 });

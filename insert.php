@@ -2,10 +2,10 @@
 /* Attempt MySQL server connection. Assuming you are running MySQL
 server with default setting (user 'root' with no password) */
 $link = mysqli_connect("localhost", "root", "root", "odie");
- 
+
 // Check connection
 if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
+    die("ERROR: Could not connect.");
 }
  
 // Escape user inputs for security
@@ -21,13 +21,17 @@ if(mysqli_num_rows($result) == 0) {
 	$sql = "INSERT INTO `users` (username, url, title, description)
 	SELECT '$username', '$url', '$title', '$description'";
 	if(mysqli_query($link, $sql)){
-	    echo "success";
+		$response = 'success'; 
 	} else{
-	    echo "ERROR: was unable to execute $sql. " . mysqli_error($link);
+		$response = 'error'; 
 	}
-} else {
-	echo 'username already exists';
+} else { //username already exists in db
+	$response = 'exists'; 
 }
+
+// return response
+echo $response;
+
 // close connection
 mysqli_close($link);
 ?>
