@@ -49,7 +49,7 @@
     <meta property="og:type" content="website" />
     <style type="text/css"> 
       html, body {margin: 0;padding: 0;width: 100%;font-family: sans-serif} #contents {width: 1000px;margin: 50px auto} section {width: 300px;margin: 0 10px 30px;display: inline-block;vertical-align: top}
-      h1 {font-size: 2em} h2 {font-size: 1.5em;} input {width: 100%;font-family: sans-serif} img {max-width: 100%} 
+      h1 {font-size: 2em} h2 {font-size: 1.5em;} a, a:active, a:visited {color: inherit} input {width: 100%;font-family: sans-serif} img {max-width: 100%} 
       .u-border {box-sizing: border-box; padding: 0 1em; border: 1px inset;} .daily {font-size: 1.2em;}
       #rand {position: absolute;display: block;top: 10px;right: 20px;padding: 5px; text-decoration: none}
       @media screen and (max-width: 1000px) {section,h1 {width: 300px;margin: 0 auto 30px;display:block} span, img, iframe { max-width: 100% !important;width: auto !important;height: auto !important;}} 
