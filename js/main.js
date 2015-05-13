@@ -3,7 +3,7 @@ $('form').on('submit', function(e) {
   e.preventDefault();
 
   $('input#url, input#username').css('border-color', 'initial');
-
+ 
   var response,
   username = $('input#username').val(),
   url = $('input#url').val(),
