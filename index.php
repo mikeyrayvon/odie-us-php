@@ -26,14 +26,14 @@
 
   if ($u) {    
     // GET ODIE
-    include('get.php');
+    include('partials/get.php');
   }
 
   // RANDOM ODIE
-  include('rand.php');
+  include('partials/rand.php');
 
   // ODIE OF THE DAY
-  include('daily.php');
+  include('partials/daily.php');
 
   mysqli_close($conn); 
 ?>
@@ -86,7 +86,7 @@
         <p>
           Open your google doc and File > Publish to the web. The link in that dialog is your published doc url
         </p>
-        <form action="insert.php" method="post" id='new-user'>
+        <form action="partials/insert.php" method="post" id='new-user'>
           <p><input type="text" name="username" id="username" placeholder="username"></p>
           <p><input type="text" name="url" id="url" placeholder="published doc url"></p>
           <p><input type="text" name="title" id="title" placeholder="title"></p>
