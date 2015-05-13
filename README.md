@@ -18,3 +18,5 @@
            \       ,,  .'      \
             `-._    _.'\        \
                 `""`    \        \
+                
+Odie makes a webpage with the content of a published google doc and gives it an Odie subdomain
