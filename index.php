@@ -1,8 +1,3 @@
-<!--
-  Odie
-  mexico city 2015
-  https://github.com/mikeyrayvon/odie
--->
 <?php
 
   $title = 'Odie';
@@ -37,6 +32,33 @@
 
   mysqli_close($conn); 
 ?>
+<!--
+  Odie
+  mexico city 2015
+  https://github.com/mikeyrayvon/odie
+-->
+<?php if ($contents) { ?>
+<!--
+        _.._   _..---.
+     .-"    ;-"       \
+    /      /           |
+   |      |       _=   |
+   ;   _.-'\__.-')     |
+    `-'      |   |    ;
+             |  /;   /      _,
+           .-.;.-=-./-""-.-` _`
+          /   |     \     \-` `,
+         |    |      |     |
+         |____|______|     |
+          \0 / \0   /      /
+       .--.-""-.`--'     .'
+      (#   )          ,  \
+      ('--'          /\`  \
+       \       ,,  .'      \
+        `-._    _.'\        \
+            `""`    \        \
+-->
+<?php } ?>
 <html>
   <head>
     <meta charset="utf-8">
@@ -51,7 +73,9 @@
   </head>
   <body>
     <?php echo $random_output; ?>
+
     <?php if ($contents) { echo $contents; } else { ?>
+
     <div id="contents">
       <?php if ($error) { echo $error; } ?>
       <h1>Odie</h1>
@@ -104,6 +128,7 @@
         <h2>Odie of the Day</h2>
         <p>
           <?php echo $daily_output; ?>
+          
         </p>
       </section>
     </div>
