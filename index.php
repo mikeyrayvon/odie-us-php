@@ -17,55 +17,23 @@
   $dbpass = 'root';
   $conn = mysqli_connect($dbhost, $dbuser, $dbpass, 'odie');
   if(! $conn ) { die('Could not connect: ' . mysqli_error()); }
+
   $table = 'users';
 
+  global $u;
+  global $conn;
+  global $table;
+
   if ($u) {    
-    $sql = "SELECT url, title, description FROM $table WHERE username = '$u'";
-
-    $result = mysqli_query( $conn, $sql );
-    $row = mysqli_fetch_array($result, MYSQL_ASSOC);
-    $publishedDocUrl = $row['url'];
-    $title = $row['title'];
-    $description = $row['description'];
-
-    if (is_null($publishedDocUrl)) {
-      $error = '404 odie doc not found D:';
-    } else {
-      $ch = curl_init();
-      $timeout = 10;
-      curl_setopt($ch, CURLOPT_URL, $publishedDocUrl);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-      $html = curl_exec($ch);
-      curl_close($ch);
-      $dom = new DOMDocument();
-      $dom->encoding = 'utf-8';
-      $dom->loadHTML(utf8_decode( $html ));
-      $dom->preserveWhiteSpace = false;
-      $dom->validateOnParse = true;
-      $contents = $dom->saveHTML($dom->getElementById('contents'));
-    }
+    // GET ODIE
+    include('get.php');
   }
 
-// RANDOM ODIE
-  if ($u) {
-    $random_sql = "SELECT * FROM $table WHERE username <> '$u' ORDER BY RAND() LIMIT 0,1";
-  } else {
-    $random_sql = "SELECT * FROM $table ORDER BY RAND() LIMIT 0,1";
-  }
-  $random_query = mysqli_query( $conn, $random_sql );
-  $random_row = mysqli_fetch_array($random_query, MYSQL_ASSOC);
-  $random_username = $random_row['username'];
-  $random_url = 'http://localhost:8888/odie/?u=' . $random_username;
-  $random_output = '<a href="' . $random_url . '" id="rand">.</a>';
+  // RANDOM ODIE
+  include('rand.php');
 
-// ODIE OF THE DAY
-  $daily_sql = "SELECT username FROM daily";
-  $daily_query = mysqli_query( $conn, $daily_sql );
-  $daily_row = mysqli_fetch_array($daily_query, MYSQL_ASSOC);
-  $daily_username = $daily_row['username'];
-  $daily_url = 'http://localhost:8888/odie/?u=' . $daily_username;
-  $daily_output = '<a href="' . $daily_url . '">' . $daily_url . '</a>';
+  // ODIE OF THE DAY
+  include('daily.php');
 
   mysqli_close($conn); 
 ?>
@@ -80,13 +48,11 @@
     <meta property="og:description" content="<?php echo $description; ?>" />
     <meta property="og:type" content="website" />
     <style type="text/css"> 
-    html, body {margin: 0;padding: 0;width: 100%;font-family: sans-serif} 
-    #contents {width: 1000px;margin: 50px auto} 
-    section {width: 300px;margin: 0 10px 30px;display: inline-block;vertical-align: top}
-    h1 {font-size: 2em} input {width: 100%;font-family: sans-serif} img {max-width: 100%} 
-    #rand {position: absolute;display: block;top: 10px;right: 20px;padding: 5px; text-decoration: none}
-    @media screen and (max-width: 1000px) { #contents {width: 90%;margin: 5% auto} } 
-    @media screen and (max-width: 700px) { section,h1 {width: 300px;margin: 0 auto 30px;display:block}span, img, iframe { max-width: 100% !important;width: auto !important;height: auto !important;}} 
+      html, body {margin: 0;padding: 0;width: 100%;font-family: sans-serif} #contents {width: 1000px;margin: 50px auto} section {width: 300px;margin: 0 10px 30px;display: inline-block;vertical-align: top}
+      h1 {font-size: 2em} h2 {font-size: 1.5em;} input {width: 100%;font-family: sans-serif} img {max-width: 100%} 
+      .u-border {box-sizing: border-box; padding: 0 1em; border: 1px inset;} .daily {font-size: 1.2em;}
+      #rand {position: absolute;display: block;top: 10px;right: 20px;padding: 5px; text-decoration: none}
+      @media screen and (max-width: 1000px) {section,h1 {width: 300px;margin: 0 auto 30px;display:block} span, img, iframe { max-width: 100% !important;width: auto !important;height: auto !important;}} 
     </style>
   </head>
   <body>
@@ -118,9 +84,10 @@
             `""`    \        \
         </pre>
       </section>
-      <section>
+      <section class="u-border">
+        <h2>Make a new Odie</h2>
         <p>
-          Odie makes a webpage with the content of a published google doc and gives it an odie subdomain, username.odie.us
+          Your username is for the Odie subdomain, like username.odie.us
         </p>
         <p>
           Open your google doc and File > Publish to the web. The link in that dialog is your published doc url
@@ -130,18 +97,24 @@
           <p><input type="text" name="url" id="url" placeholder="published doc url"></p>
           <p><input type="text" name="title" id="title" placeholder="title"></p>
           <p><input type="text" name="description" id="description" placeholder="description"></p>
-          <input type="submit" value="XD">
+          <input type="submit" value="Odie!">
         </form>
         <div id="response"></div>
       </section>
       <section>
+        <h2>What is Odie?</h2>
         <p>
-          Odie of the Day: <?php echo $daily_output; ?>
+          Odie makes a webpage with the content of a published google doc and gives it an Odie subdomain
+        </p>
+        <hr>
+        <h2>Odie of the Day</h2>
+        <p>
+          <?php echo $daily_output; ?>
         </p>
       </section>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="main.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.min.js"></script>
   <?php } ?>
   </body>
 </html>
