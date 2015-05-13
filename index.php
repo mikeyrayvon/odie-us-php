@@ -47,13 +47,7 @@
     <meta property="og:title" content="<?php echo $title; ?>" />
     <meta property="og:description" content="<?php echo $description; ?>" />
     <meta property="og:type" content="website" />
-    <style type="text/css"> 
-      html, body {margin: 0;padding: 0;width: 100%;font-family: sans-serif} #contents {width: 1000px;margin: 50px auto} section {width: 300px;margin: 0 10px 30px;display: inline-block;vertical-align: top;box-sizing: border-box; padding: 0 1em;}
-      h1 {font-size: 2em} h2 {font-size: 1.5em;} a, a:active, a:visited {color: inherit} input {width: 100%;font-family: sans-serif} img {max-width: 100%} 
-      button {width: 100%; cursor: pointer;}.u-border {border: 1px inset;} .daily {font-size: 1.2em;}
-      #rand {position: absolute;display: block;top: 10px;right: 20px;padding: 5px; text-decoration: none}
-      @media screen and (max-width: 1000px) {#contents {width: 90%;margin: 5% auto} section,h1 {width: 300px;margin: 0 auto 30px;display:block} span, img, iframe { max-width: 100% !important;width: auto !important;height: auto !important;}} 
-    </style>
+    <link rel='stylesheet' href='css/site.min.css' type='text/css' media='all' />
   </head>
   <body>
     <?php echo $random_output; ?>
