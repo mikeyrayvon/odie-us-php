@@ -1,9 +1,9 @@
 <?php
 
   $title = 'Odie';
-  $description = 'gdocs-cms network';
+  $description = 'the Odie webnet ~~ make a webpage with the content of a google doc';
 
-  $url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/{$_SERVER['REQUEST_URI']}";
+  $url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
   $query = (parse_url($url, PHP_URL_QUERY));
   parse_str($query);
 
@@ -80,6 +80,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:title" content="<?php echo $title; ?>" />
     <meta property="og:description" content="<?php echo $description; ?>" />
+    <meta property="og:url" content="<?php echo $url; ?>" />
+<?php if (empty($contents)) { ?>
+    <meta property="og:image" content="<?php echo $url; ?>img/odie.jpg" />
+<?php } ?>
     <meta property="og:type" content="website" />
     <link rel='stylesheet' href='css/site.min.css' type='text/css' media='all' />
   </head>
@@ -133,6 +137,9 @@
         <p>
           Odie makes a webpage with the content of a published google doc and gives it an Odie subdomain
         </p>
+        <p>
+          When you change the google doc, Odie waits for google to update, and your Odie page gets updated too!
+        </p>
         <hr>
         <h2>Odie of the Hour</h2>
         <p>
@@ -143,7 +150,10 @@
     </div>
     <script src="js/jquery.min.js"></script>
     <script type="text/javascript"> var home = '<?php echo $home; ?>'; </script>
-    <script src="js/main.min.js"></script>
+    <script src="js/main.js"></script>
   <?php } ?>
+
+    <?php include('partials/ga.php'); // google analytics ?> 
+
   </body>
 </html>
