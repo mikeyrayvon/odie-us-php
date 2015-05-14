@@ -21,6 +21,8 @@ if ($string == 'ok' || $argv['1'] == 'ok') { // checks for ?string=ok or cron ar
 
 	mysqli_close($conn);
 
+	var_dump($username);
+
 } else {
 	die('no, fuck u'); // if querystring or cron argv doesnt check out
 }
