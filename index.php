@@ -7,10 +7,17 @@
   $query = (parse_url($url, PHP_URL_QUERY));
   parse_str($query);
 
-  $dbhost = 'localhost';
-  $dbuser = 'root';
-  $dbpass = 'root';
-  $conn = mysqli_connect($dbhost, $dbuser, $dbpass, 'odie');
+  if (is_null($query)) {
+    $parsedUrl = parse_url($url);
+    $host = explode('.', $parsedUrl['host']);
+    if ($host[1] == 'odie' && $host[2] == 'us') {
+      $u = $host[0];
+    }
+  }
+
+  include('partials/vars.php');
+
+  $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
   if(! $conn ) { die('Could not connect: ' . mysqli_error()); }
 
   $table = 'users';
@@ -18,6 +25,7 @@
   global $u;
   global $conn;
   global $table;
+  global $home;
 
   if ($u) {    
     // GET ODIE
@@ -35,7 +43,9 @@
 <!--
   Odie
   mexico city 2015
+  odie.us
   https://github.com/mikeyrayvon/odie
+  interglobal.vision
 -->
 <?php if ($contents) { ?>
 <!--
@@ -125,7 +135,7 @@
           Odie makes a webpage with the content of a published google doc and gives it an Odie subdomain
         </p>
         <hr>
-        <h2>Odie of the Day</h2>
+        <h2>Odie of the Hour</h2>
         <p>
           <?php echo $daily_output; ?>
           
@@ -133,6 +143,7 @@
       </section>
     </div>
     <script src="js/jquery.min.js"></script>
+    <script type="text/javascript"> var home = '<?php echo $home; ?>'; </script>
     <script src="js/main.min.js"></script>
   <?php } ?>
   </body>
