@@ -21,8 +21,12 @@ $('form').on('submit', function(e) {
         data: dataString,
         success: function(data) {
           if (data == 'success') {
-            var accountUrl = window.location.href + '?u=' + username;
-            response = '<p><strong>Success!</strong><br>Here&apos;s your Odie:</p><p><a href="' + accountUrl + '">' + accountUrl + '</a></p>';
+            if (home == 'odie.us') {
+              var accountUrl = username + '.' + home;
+            } else {
+              var accountUrl = home + '?u=' + username;
+            }
+            response = '<p><strong>Success!</strong><br>Here&apos;s your Odie:</p><p><a href="http://' + accountUrl + '">' + accountUrl + '</a></p>';
           } else if (data == 'exists') {
             response = '<p>That username already exists!<br>Try another</p>';
           } else if (data == 'error') {
