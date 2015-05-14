@@ -150,7 +150,7 @@
     </div>
     <script src="js/jquery.min.js"></script>
     <script type="text/javascript"> var home = '<?php echo $home; ?>'; </script>
-    <script src="js/main.js"></script>
+    <script src="js/main.min.js"></script>
   <?php } ?>
 
     <?php include('partials/ga.php'); // google analytics ?> 
