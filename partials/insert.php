@@ -10,11 +10,17 @@ if($link === false){
     die("ERROR: Could not connect.");
 }
  
-// Escape user inputs for security
-$username = mysqli_real_escape_string($link, $_POST['username']);
-$url = mysqli_real_escape_string($link, $_POST['url']);
-$title = mysqli_real_escape_string($link, $_POST['title']);
-$description = mysqli_real_escape_string($link, $_POST['description']);
+// Strip tags for security
+$username_strip = strip_tags($_POST['username']);
+$url_strip = strip_tags($_POST['url']);
+$title_strip = strip_tags($_POST['title']);
+$description_strip = strip_tags($_POST['description']);
+
+// Escape for security
+$username = mysqli_real_escape_string($link, $username_strip);
+$url = mysqli_real_escape_string($link, $url_strip);
+$title = mysqli_real_escape_string($link, $title_strip);
+$description = mysqli_real_escape_string($link, $description_strip);
  
 // attempt insert query execution
 $result = mysqli_query($link, "SELECT * FROM users WHERE username = '$username'");
