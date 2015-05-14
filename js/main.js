@@ -5,7 +5,8 @@ $('form').on('submit', function(e) {
   $('input#url, input#username').css('border-color', 'initial');
  
   var response,
-  username = $('input#username').val(),
+  accountUrl,
+  username = $('input#subdomain').val(),
   url = $('input#url').val(),
   title = $('input#title').val(),
   description = $('input#description').val(),
@@ -22,11 +23,11 @@ $('form').on('submit', function(e) {
         success: function(data) {
           if (data == 'success') {
             if (home == 'odie.us') {
-              var accountUrl = username + '.' + home;
+              accountUrl = username + '.' + home;
             } else {
-              var accountUrl = home + '?u=' + username;
+              accountUrl = home + '?u=' + username;
             }
-            response = '<p><strong>Success!</strong><br>Here&apos;s your Odie:</p><p><a href="http://' + accountUrl + '">' + accountUrl + '</a></p>';
+            response = '<p><strong>Success!</strong><br>Here&apos;s your Odie:</p><p><a href="' + accountUrl + '">' + accountUrl + '</a></p>';
           } else if (data == 'exists') {
             response = '<p>That username already exists!<br>Try another</p>';
           } else if (data == 'error') {
