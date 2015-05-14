@@ -46,6 +46,8 @@
   odie.us
   https://github.com/mikeyrayvon/odie
   interglobal.vision
+
+  KeP Xu WEB WERD
 -->
 <?php if ($contents) { ?>
 <!--
@@ -115,13 +117,10 @@
       <section class="u-border">
         <h2>Make a new Odie</h2>
         <p>
-          Your username is for the Odie subdomain, like username.odie.us
-        </p>
-        <p>
           Open your google doc and File > Publish to the web. The link in that dialog is your published doc url
         </p>
         <form action="partials/insert.php" method="post" id='new-user'>
-          <p><input type="text" name="username" id="username" placeholder="username"></p>
+          <p><input type="text" name="username" id="subdomain" placeholder="subdomain"> .odie.us</p>
           <p><input type="text" name="url" id="url" placeholder="published doc url"></p>
           <p><input type="text" name="title" id="title" placeholder="title"></p>
           <p><input type="text" name="description" id="description" placeholder="description"></p>
