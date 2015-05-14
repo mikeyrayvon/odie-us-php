@@ -8,8 +8,8 @@ $random_query = mysqli_query( $conn, $random_sql );
 $random_row = mysqli_fetch_array($random_query, MYSQL_ASSOC);
 $random_username = $random_row['username'];
 if ($home == 'odie.us') {
-	$random_url = 'http://' . $random_username . '.' . $home;
+	$random_url = $random_username . '.' . $home;
 } else {
 	$random_url = $home . '?u=' . $random_username;
 }
-$random_output = '<a href="' . $random_url . '" id="rand">.</a>';
+$random_output = '<a href="http://' . $random_url . '" id="rand">.</a>';
