@@ -17,8 +17,16 @@ section {
   box-sizing: border-box;
   padding: 0 1em;
 }
+header {
+  width: 300px;
+  margin: 0 10px 30px;
+  box-sizing: border-box;
+  padding: 0 1em;
+}
 h1 {
   font-size: 2em;
+  margin: 0 0.5em 0 0;
+  display: inline-block;
 }
 h2 {
   font-size: 1.5em;
@@ -62,7 +70,7 @@ button {
     margin: 5% auto;
   }
   section,
-  h1 {
+  header {
     width: 300px;
     margin: 0 auto 30px;
     display: block;
@@ -73,5 +81,8 @@ button {
     max-width: 100% !important;
     width: auto !important;
     height: auto !important;
+  }
+  #star {
+    height: 20px !important;
   }
 }
