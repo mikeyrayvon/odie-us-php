@@ -94,9 +94,12 @@
 
     <div id="contents">
       <?php if ($error) { echo $error; } ?>
-      <h1>Odie</h1>
+      
+      <header id="header">
+        <h1>Odie</h1>
+        <iframe id="star" src="https://ghbtns.com/github-btn.html?user=mikeyrayvon&repo=odie&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe> 
+      </header>       
       <section>
-        
         <pre>
         _.._   _..---.
      .-"    ;-"       \
@@ -144,7 +147,6 @@
         <h2>Odie of the Hour</h2>
         <p>
           <?php echo $daily_output; ?>
-          
         </p>
       </section>
     </div>
