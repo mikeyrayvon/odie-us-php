@@ -1,5 +1,5 @@
 <?php
-$sql = "SELECT url, title, description FROM $table WHERE username = '$u'";
+$sql = "SELECT url, title, description, username FROM $table WHERE username = '$u'";
 
 $result = mysqli_query( $conn, $sql );
 $row = mysqli_fetch_array($result, MYSQL_ASSOC);
@@ -10,6 +10,10 @@ if (is_null($publishedDocUrl)) {
 } else {
   $title = $row['title'];
   $description = $row['description'];
+  $username = $row['username'];
+
+  $views_sql = "UPDATE $table SET views=views+1 WHERE username = '$username'";
+  mysqli_query( $conn, $views_sql );
 
   $ch = curl_init();
   $timeout = 10;
