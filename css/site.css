@@ -32,6 +32,9 @@ input {
   width: 100%;
   font-family: sans-serif;
 }
+input#subdomain {
+  width: 60%;
+}
 img {
   max-width: 100%;
 }
