@@ -13,7 +13,7 @@ $('form').on('submit', function(e) {
   dataString = 'username='+ username + '&url=' + url + '&title=' + title + '&description=' + description;
   if (username.length > 0 && url.length > 0) {
     var host = parseURL(url).hostname; 
-    var path = parseURL(url).pathname; 
+    var path = parseURL(url).pathname;  
     var pub = path.substr(path.length - 4);
     if ( host == 'docs.google.com' && pub == '/pub' ) {
       $.ajax({
@@ -27,7 +27,7 @@ $('form').on('submit', function(e) {
             } else {
               accountUrl = home + '?u=' + username;
             }
-            response = '<p><strong>Success!</strong><br>Here&apos;s your Odie:</p><p><a href="' + accountUrl + '">' + accountUrl + '</a></p>';
+            response = '<p><strong>Success!</strong><br>Here&apos;s your Odie:</p><p><a href="http://' + accountUrl + '">' + accountUrl + '</a></p>';
           } else if (data == 'exists') {
             response = '<p>That username already exists!<br>Try another</p>';
           } else if (data == 'error') {
