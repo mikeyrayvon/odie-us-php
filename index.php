@@ -36,7 +36,7 @@
 
     // DIRECTORY
     include('partials/dir.php');
-    
+
   }
 
   // RANDOM ODIE
@@ -46,6 +46,12 @@
   include('partials/daily.php');
 
   mysqli_close($conn); 
+
+  if ($home == 'odie.us') {
+  $dir_url = 'dir.' . $home;
+  } else {
+  $dir_url = $home . '?u=dir';
+  }
 ?>
 <!--
   Odie
@@ -103,7 +109,7 @@
       <?php if ($error) { echo $error; } ?>
       
       <header id="header">
-        <h1>Odie</h1>
+        <h1><a href="http://<?php echo $home; ?>">Odie</a></h1>
         <iframe id="star" src="https://ghbtns.com/github-btn.html?user=mikeyrayvon&repo=odie&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe> 
       </header>   
       <?php if ($dir) { echo '<section id="dir">' . $dir . '</section>'; } else { ?>    
@@ -155,6 +161,10 @@
         <h2>Odie of the Hour</h2>
         <p>
           <?php echo $daily_output; ?>
+        </p>
+        <hr>
+        <p>
+          <a href="http://<?php echo $dir_url; ?>">Directory</a>
         </p>
       </section>
       <?php } // not directory ?>
