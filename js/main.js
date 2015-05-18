@@ -11,7 +11,7 @@ $('form').on('submit', function(e) {
   title = $('input#title').val(),
   description = $('input#description').val(),
   dataString = 'username='+ username + '&url=' + url + '&title=' + title + '&description=' + description;
-  if (username.length > 0 && url.length > 0) {
+  if (username.length > 0 && url.length > 0 && username != 'www' && != 'dir') {
     var host = parseURL(url).hostname; 
     var path = parseURL(url).pathname;  
     var pub = path.substr(path.length - 4);
@@ -43,13 +43,18 @@ $('form').on('submit', function(e) {
       $('#response').html('<p>bad doc url</p>');
     }
   } else {
-    if (username.length == 0) {
+    if (username == 'www' || username == 'dir') {
       $('input#username').css('border-color', 'red');
+      $('#response').html('<p>reserved subdomain.  try another</p>');
+    } else {
+      if (username.length == 0) {
+        $('input#username').css('border-color', 'red');
+      }
+      if (url.length == 0) {
+        $('input#url').css('border-color', 'red');
+      }
+      $('#response').html('<p>form incomplete</p>');
     }
-    if (url.length == 0) {
-      $('input#url').css('border-color', 'red');
-    }
-    $('#response').html('<p>form incomplete</p>');
   }
   return false;
 });
