@@ -11,7 +11,7 @@ $('form').on('submit', function(e) {
   title = $('input#title').val(),
   description = $('input#description').val(),
   dataString = 'username='+ username + '&url=' + url + '&title=' + title + '&description=' + description;
-  if (username.length > 0 && url.length > 0 && username != 'www' && != 'dir') {
+  if (username.length > 0 && url.length > 0 && username != 'www' && username != 'dir') {
     var host = parseURL(url).hostname; 
     var path = parseURL(url).pathname;  
     var pub = path.substr(path.length - 4);
