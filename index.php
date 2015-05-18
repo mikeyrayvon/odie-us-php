@@ -27,9 +27,16 @@
   global $table;
   global $home;
 
-  if ($u) {    
+  if ($u && $u != 'www' && $u != 'dir') {  
+
     // GET ODIE
     include('partials/get.php');
+
+  } else if ($u && $u == 'dir') {
+
+    // DIRECTORY
+    include('partials/dir.php');
+    
   }
 
   // RANDOM ODIE
@@ -98,7 +105,8 @@
       <header id="header">
         <h1>Odie</h1>
         <iframe id="star" src="https://ghbtns.com/github-btn.html?user=mikeyrayvon&repo=odie&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe> 
-      </header>       
+      </header>   
+      <?php if ($dir) { echo '<section id="dir">' . $dir . '</section>'; } else { ?>    
       <section>
         <pre>
         _.._   _..---.
@@ -149,6 +157,7 @@
           <?php echo $daily_output; ?>
         </p>
       </section>
+      <?php } // not directory ?>
     </div>
     <script src="js/jquery.min.js"></script>
     <script type="text/javascript"> var home = '<?php echo $home; ?>'; </script>
