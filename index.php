@@ -138,7 +138,10 @@
       <section class="u-border">
         <h2>Make a new Odie</h2>
         <p>
-          Open your google doc and File > Publish to the web. The link in that dialog is your published doc url
+          Open your google doc and File > Publish to the web. The link in that dialog is your <em>published doc url</em>
+        </p>
+        <p>
+          No special characters except dashes in your subdomain, please!
         </p>
         <form action="partials/insert.php" method="post" id='new-user'>
           <p><input type="text" name="username" id="subdomain" placeholder="subdomain"> .odie.us</p>
