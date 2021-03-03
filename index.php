@@ -37,6 +37,15 @@
     // DIRECTORY
     include('partials/dir.php');
 
+    $title = 'Odie directory';
+    $description = 'Directory of Odies on the Odie webnet';
+
+  }
+
+  if ($home == 'odie.us') {
+    $dir_url = 'dir.' . $home;
+  } else {
+    $dir_url = $home . '?u=dir';
   }
 
   // RANDOM ODIE
@@ -47,11 +56,6 @@
 
   mysqli_close($conn); 
 
-  if ($home == 'odie.us') {
-  $dir_url = 'dir.' . $home;
-  } else {
-  $dir_url = $home . '?u=dir';
-  }
 ?>
 <!--
   Odie
@@ -86,8 +90,7 @@
 <?php } ?>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    
     <title><?php echo $title; ?></title>
     <meta name="description" content="<?php echo $description; ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -99,6 +102,7 @@
 <?php } ?>
     <meta property="og:type" content="website" />
     <link rel='stylesheet' href='css/site.min.css' type='text/css' media='all' />
+    <style type='text/css'>#contents > div { padding: 0 !important; }</style>    
   </head>
   <body>
     <?php echo $random_output; ?>
@@ -138,14 +142,12 @@
       <section class="u-border">
         <h2>Make a new Odie</h2>
         <p>
-          Open your google doc and File > Publish to the web. The link in that dialog is your <em>published doc url</em>
-        </p>
-        <p>
-          No special characters except dashes in your subdomain, please!
+          Open your google doc and File > Publish to the web. Click 'Publish'. The link it gives you is your published doc url
         </p>
         <form action="partials/insert.php" method="post" id='new-user'>
           <p><input type="text" name="username" id="subdomain" placeholder="subdomain"> .odie.us</p>
-          <p><input type="text" name="url" id="url" placeholder="published doc url"></p>
+<p style="font-size:.5rem;">no accents, no $#%@, no spaces, no periods in the subdomain</p>          
+<p><input type="text" name="url" id="url" placeholder="published doc url"></p>
           <p><input type="text" name="title" id="title" placeholder="title"></p>
           <p><input type="text" name="description" id="description" placeholder="description"></p>
           <button type="submit">Odie!</button>
@@ -161,13 +163,11 @@
           When you change the google doc, Odie waits for google to update, and your Odie page gets updated too!
         </p>
         <hr>
-        <h2>Odie of the Hour</h2>
         <p>
-          <?php echo $daily_output; ?>
-        </p>
-        <hr>
-        <p>
-          <a href="http://<?php echo $dir_url; ?>">Directory</a>
+          <ul>
+            <li><strong>Odie of the Hour:</strong> <?php echo $daily_output; ?></li>
+            <!--li><a href="http://<?php echo $dir_url; ?>">Directory</a></li-->
+          </ul>
         </p>
       </section>
       <?php } // not directory ?>

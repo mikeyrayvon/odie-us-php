@@ -30,8 +30,6 @@ $('form').on('submit', function(e) {
             response = '<p><strong>Success!</strong><br>Here&apos;s your Odie:</p><p><a href="http://' + accountUrl + '">' + accountUrl + '</a></p>';
           } else if (data == 'exists') {
             response = '<p>That username already exists!<br>Try another</p>';
-          } else if (data == 'badurl') {
-            response = '<p>That URL is not a published Google Doc!</p>';
           } else if (data == 'error') {
             response = '<p>??? something went wrong</p>';
           } else {

@@ -2,7 +2,7 @@
 $sql = "SELECT url, title, description, username FROM $table WHERE username = '$u'";
 
 $result = mysqli_query( $conn, $sql );
-$row = mysqli_fetch_array($result, MYSQL_ASSOC);
+$row = mysqli_fetch_assoc($result);
 $publishedDocUrl = $row['url'];
 
 if (is_null($publishedDocUrl)) {
@@ -22,9 +22,10 @@ if (is_null($publishedDocUrl)) {
   curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
   $html = curl_exec($ch);
   curl_close($ch);
+  libxml_use_internal_errors(true);
   $dom = new DOMDocument();
   $dom->encoding = 'utf-8';
-  $dom->loadHTML(utf8_decode( $html ));
+  $dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
   $dom->preserveWhiteSpace = false;
   $dom->validateOnParse = true;
   $contents = $dom->saveHTML($dom->getElementById('contents'));

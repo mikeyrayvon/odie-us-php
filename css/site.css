@@ -80,10 +80,14 @@ tr.letter-header {
     margin: 5% auto;
   }
   section,
+  section#dir,
   header {
     width: 300px;
     margin: 0 auto 30px;
     display: block;
+  }
+  table.dir {
+    width: auto;
   }
   span,
   img,
